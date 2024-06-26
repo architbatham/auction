@@ -1,0 +1,20 @@
+/* Define the button styles */
+.button {
+    background-color: #4CAF50; /* Green background */
+    border: none;             /* Remove borders */
+    color: white;             /* White text */
+    padding: 10px 22px;       /* Some padding */
+    text-align: center;       /* Centered text */
+    text-decoration: none;    /* Remove underline */
+    display: inline-block;    /* Make the container an inline-block */
+    font-size: 16px;          /* Increase font size */
+    margin: 4px 2px;          /* Some margin */
+    cursor: pointer;          /* Pointer/hand icon on hover */
+    border-radius: 4px;       /* Rounded corners */
+  }
+  
+  /* Add a hover effect for the button */
+  .button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
