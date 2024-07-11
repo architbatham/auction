@@ -1,6 +1,7 @@
 import './register.css';
 import { useState } from 'react';
 import axios from 'axios'; // use to create web services and API
+import { _userapiurl } from '../../Api.url';
 
 function Register() {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ function Register() {
   const [gender, setGender] = useState("");
 
   const [output, setOutput] = useState("");
-
+ 
   const handleSubmit = () => {
     const userDetails = {
       name: name,
@@ -25,7 +26,7 @@ function Register() {
     };
 
     axios
-      .post("http://localhost:3001/user/save", userDetails)
+      .post(_userapiurl+"save", userDetails)
       .then((response) => {
         setOutput("User registered successfully.");
         setName("");
