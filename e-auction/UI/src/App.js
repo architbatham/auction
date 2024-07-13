@@ -14,6 +14,9 @@ import { Routes, Route } from 'react-router-dom';
  import Login from './componants/logincomponant/login.js'
  import Service from './componants/servicecomponant/service.js'
  import Register from './componants/registercomponant/register.js'
+import AdminHome from './componants/AdminHomecomponant/AdminHome.js';
+import UserHome from './componants/UserHomecomponent/UserHome.js';
+import Logout from './componants/logoutcomponent/logout.js';
 
 
 function App() {
@@ -32,6 +35,9 @@ function App() {
       <Route path ="/register" element={<Register />}> </Route>
       
       <Route path ="/login" element={<Login />}> </Route>
+      <Route path ="/admin" element={<AdminHome/>}> </Route>
+      <Route path ="/user" element={<UserHome/>}> </Route>
+      <Route path ="/logout" element={<Logout/>}> </Route>
 
      </Routes>
     <Footer />

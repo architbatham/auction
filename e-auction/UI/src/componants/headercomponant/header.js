@@ -1,27 +1,49 @@
 import './header.css';
 import { Link } from 'react-router-dom';
+import { useState,useEffect } from 'react';
 
 function Header() {
-    return (
-        <>
-        <div className="hero_area">
-        <div className="hero_bg_box">
-          <img src="assets/images/2.webp" alt=""/>
-        </div>
 
-        {/* header section starts */}
-<header className="header_section">
-  <div className="container">
-    <nav className="navbar navbar-expand-lg custom_nav-container ">
-      <a className="navbar-brand" href="index.html">
-        <span>BidForTime</span>
-      </a>
-
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className=""></span>
-      </button>
-
+    const [HeaderContent , setHeaderContent] = useState();
+    useEffect(()=>{
+      if(localStorage.getItem("token")!=undefined && localStorage.getItem("role")=="admin")
+      { 
+        setHeaderContent(<>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul className="navbar-nav">
+          <li className="nav-item active">
+            <a className="nav-link" ><Link style={{color:'white'}} to="/admin">Admin Home</Link><span className="sr-only">(current)</span></a>
+          </li>
+       
+          <li className="nav-item">
+            <a className="nav-link" ><Link style={{color:'white'}} to="/logout">Logout</Link></a>
+          </li>
+         </ul>
+      </div>
+       </>);
+      }
+      else if(localStorage.getItem("token")!=undefined && localStorage.getItem("role")=="user")
+        {
+
+          setHeaderContent(<>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <a className="nav-link" ><Link style={{color:'white'}} to="/user">User Home</Link><span className="sr-only">(current)</span></a>
+                </li>
+             
+                <li className="nav-item">
+                  <a className="nav-link" ><Link style={{color:'white'}} to="/logout">Logout</Link></a>
+                </li>
+               </ul>
+            </div>
+             </>);
+
+        }
+        else
+        {
+          setHeaderContent(<>
+             <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav">
           <li className="nav-item active">
             <a className="nav-link" ><Link style={{color:'white'}} to="/">Home</Link><span className="sr-only">(current)</span></a>
@@ -53,6 +75,30 @@ function Header() {
           </li>
         </ul>
       </div>
+          </>)
+        }
+    });
+
+    return (
+        <>
+        <div className="hero_area">
+        <div className="hero_bg_box">
+          <img src="assets/images/2.webp" alt=""/>
+        </div>
+
+        {/* header section starts */}
+<header className="header_section">
+  <div className="container">
+    <nav className="navbar navbar-expand-lg custom_nav-container ">
+      <a className="navbar-brand" href="index.html">
+        <span>E-auction </span>
+      </a>
+
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span className=""></span>
+      </button>
+
+      {HeaderContent}
     </nav>
   </div>
 </header>

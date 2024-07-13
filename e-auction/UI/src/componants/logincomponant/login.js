@@ -1,9 +1,11 @@
 import './login.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'; // use to create web services and API
 import { _userapiurl } from '../../Api.url';
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [output, setOutput] = useState("");
@@ -17,21 +19,26 @@ function Login() {
     axios
       .post(_userapiurl + "login", usersDetails)
       .then((response) => {
-        var users = response.data.usersDetails;
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("name", users.name);
-        localStorage.setItem("email", users.name);
-        localStorage.setItem("mobile", users.name);
-        localStorage.setItem("city", users.name);
-        localStorage.setItem("gender", users.name);
-        localStorage.setItem("info", users.name);
-        localStorage.setItem("role", users.name);
-
-        setOutput("Login Successfull.");
+        const { userDetails, token } = response.data;
         
+        if (userDetails && token) {
+          localStorage.setItem("token", token);
+          localStorage.setItem("_id", userDetails._id);
+          localStorage.setItem("name", userDetails.name);
+          localStorage.setItem("email", userDetails.email);
+          localStorage.setItem("mobile", userDetails.mobile);
+          localStorage.setItem("city", userDetails.city);
+          localStorage.setItem("gender", userDetails.gender);
+          localStorage.setItem("info", userDetails.info);
+          localStorage.setItem("role", userDetails.role);
+          userDetails.role=="admin"?navigate("/admin"):navigate("/user");
+
+          setOutput("Login Successful.");
+        } else {
+          setOutput("Login failed. Please try again.");
+        }
       })
       .catch((error) => {
-        // console.log(error);
         setOutput("Login failed. Please try again.");
         setEmail("");
         setPassword("");
