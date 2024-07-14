@@ -1,11 +1,23 @@
 import './footer.css'
+import { useState, useEffect } from 'react';
 
 function Footer() {
-    return (
-        <>
-        {/* footer section */}
-      <footer className="footer_section">
-      <div className="container">
+
+  const [FooterContent, setFooterContent] = useState();
+
+
+  const [HeaderContent , setHeaderContent] = useState();
+    useEffect(()=>{
+      if(localStorage.getItem("token")!=undefined)
+      {
+         setFooterContent(<> 
+         
+         </>)
+      }
+        else
+        {
+          setFooterContent(<> 
+          <div className="container">
         <div className="row">
           <div className="col-md-6 col-lg-3 footer_col">
             <div className="footer_contact">
@@ -49,10 +61,21 @@ function Footer() {
             </form>
           </div>
         </div>
-        <div className="footer-info">
+        
+      </div>
+          </>)
+        }
+
+      });
+
+    return (
+        <>
+        {/* footer section */}
+      <footer className="footer_section">
+      {FooterContent}
+      <div className="footer-info">
           <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a href="https://html.design/">Free Html Templates</a>&copy; <span id="displayYear"></span> Distributed By <a href="https://themewagon.com/">ThemeWagon</a></p>
         </div>
-      </div>
     </footer>
 </>
     );
