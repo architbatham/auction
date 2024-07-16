@@ -49,9 +49,9 @@ export var fetch=async(req,res)=>{
 };
 
 export var update=async(req,res)=>{
-  let userDetails = await UserSchemaModel.findOne(JSON.parse(req.body.condition_obj));
+  let userDetails = await UserSchemaModel.findOne(req.body.condition_obj);
   if(userDetails){
-      let user=await UserSchemaModel.updateOne(JSON.parse(req.body.condition_obj),{$set: JSON.parse(req.body.content_obj)});   
+      let user=await UserSchemaModel.updateOne(req.body.condition_obj,{$set:req.body.content_obj});   
       if(user)
         res.status(200).json({"msg":"success"});
       else
@@ -62,9 +62,9 @@ export var update=async(req,res)=>{
 };
 
 export var deleteUser=async(req,res)=>{
-  let userDetails = await UserSchemaModel.findOne(JSON.parse(req.body.condition_obj));
+  let userDetails = await UserSchemaModel.findOne(req.body.condition_obj);
   if(userDetails){
-      let user=await UserSchemaModel.deleteOne(JSON.parse(req.body.condition_obj));   
+      let user=await UserSchemaModel.deleteOne(req.body.condition_obj);   
       if(user)
         res.status(200).json({"msg":"success"});
       else

@@ -17,7 +17,7 @@ import { Routes, Route } from 'react-router-dom';
 import AdminHome from './componants/AdminHomecomponant/AdminHome.js';
 import UserHome from './componants/UserHomecomponent/UserHome.js';
 import Logout from './componants/logoutcomponent/logout.js';
-
+import Manageusers from './componants/ManageUserscomponant/ManageUser.js';
 
 function App() {
   return (
@@ -36,8 +36,11 @@ function App() {
       
       <Route path ="/login" element={<Login />}> </Route>
       <Route path ="/admin" element={<AdminHome/>}> </Route>
+      <Route path ="/manageusers" element={<Manageusers/>}> </Route>
       <Route path ="/user" element={<UserHome/>}> </Route>
       <Route path ="/logout" element={<Logout/>}> </Route>
+      
+
 
      </Routes>
     <Footer />

@@ -1,12 +1,14 @@
 import './header.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Auth from '../AuthComponent/auth';
 
 function Header() {
   const [HeaderContent, setHeaderContent] = useState();
   const [imageSrc, setImageSrc] = useState('assets/images/2.webp');
   const [title, setTitle] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,6 +22,10 @@ function Header() {
               <li className="nav-item active">
                 <a className="nav-link"><Link style={{ color: 'white' }} to="/admin">Admin Home</Link><span className="sr-only">(current)</span></a>
               </li>
+             
+              <li className="nav-item">
+                <a className="nav-link"><Link style={{ color: 'white' }} to="/manageusers">Manage User</Link></a>
+              </li>
               <li className="nav-item">
                 <a className="nav-link"><Link style={{ color: 'white' }} to="/logout">Logout</Link></a>
               </li>
@@ -29,7 +35,7 @@ function Header() {
       );
       setImageSrc('assets/images/Admin.jpg'); // Change to your desired admin image
       setTitle('Admin Page'); // Set title for admin page
-      navigate('/admin'); // Programmatic navigation to admin page
+      // navigate('/admin'); // Programmatic navigation to admin page
     } else if (token !== undefined && role === "user") {
       setHeaderContent(
         <>
@@ -37,6 +43,9 @@ function Header() {
             <ul className="navbar-nav">
               <li className="nav-item active">
                 <a className="nav-link"><Link style={{ color: 'white' }} to="/user">User Home</Link><span className="sr-only">(current)</span></a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link"><Link style={{ color: 'white' }} to="/Happyt">Happy</Link></a>
               </li>
               <li className="nav-item">
                 <a className="nav-link"><Link style={{ color: 'white' }} to="/logout">Logout</Link></a>
@@ -47,7 +56,7 @@ function Header() {
       );
       setImageSrc('assets/images/User.jpg'); // Change to your desired user image
       setTitle('User Page'); // Set title for user page
-      navigate('/user'); // Programmatic navigation to user page
+      // navigate('/user'); // Programmatic navigation to user page
     } else {
       setHeaderContent(
         <>
@@ -88,10 +97,23 @@ function Header() {
       setImageSrc('assets/images/2.webp'); // Change to your desired default image
       setTitle('Welcome to E-auction website Hear You can Buy or Sell Scrole Down'); // Set default title
     }
-  }, [navigate]);
+
+    // Check if the current path is '/manageusers' and change the image
+    if (location.pathname === '/manageusers') {
+      setImageSrc('assets/images/manageusers.jpg'); // Change to your desired image for manage users page
+      setTitle('Manage Users');
+    }
+
+  }, [navigate, location]);
 
   return (
     <>
+   {/* Authentication Token */}
+
+   <Auth />
+
+
+    {/* Background image */}
       <div className="hero_area">
         <div className="hero_bg_box">
           <img src={imageSrc} alt=""/>

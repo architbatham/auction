@@ -6,7 +6,7 @@ function Footer() {
   const [FooterContent, setFooterContent] = useState();
 
 
-  const [HeaderContent , setHeaderContent] = useState();
+  // const [HeaderContent , setHeaderContent] = useState();
     useEffect(()=>{
       if(localStorage.getItem("token")!=undefined)
       {
@@ -63,6 +63,7 @@ function Footer() {
         </div>
         
       </div>
+
           </>)
         }
 
@@ -72,8 +73,9 @@ function Footer() {
         <>
         {/* footer section */}
       <footer className="footer_section">
-      {FooterContent}
-      <div className="footer-info">
+        {FooterContent}
+        <hr class="custom-hr"/>
+        <div className="footer-info">
           <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a href="https://html.design/">Free Html Templates</a>&copy; <span id="displayYear"></span> Distributed By <a href="https://themewagon.com/">ThemeWagon</a></p>
         </div>
     </footer>
